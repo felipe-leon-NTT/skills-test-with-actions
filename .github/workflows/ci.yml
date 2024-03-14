@@ -34,3 +34,9 @@ jobs:
         with:
           name: remark-lint-report
           path: remark-lint-report.json
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: remark-lint-report
+      - name: Display structure of downloaded files
+        run: ls -R
