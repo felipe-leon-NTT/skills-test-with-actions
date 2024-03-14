@@ -29,14 +29,30 @@ jobs:
         run: |
           npm install remark-cli remark-preset-lint-consistent vfile-reporter-json
           npx remark . --use remark-preset-lint-consistent --report vfile-reporter-json 2> remark-lint-report.json
-
-      - name: Display structure of downloaded files
-        run: ls -R
-
+       
       - uses: actions/upload-artifact@v3
         with:
           name: remark-lint-report
           path: remark-lint-report.json
 
+      - run: echo "Hola mundo" > hola_mundo.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: hola_mundo
+          path: hola_mundo.txt
+      
+      - run: rm hola_mundo.txt
+
+      - name: Display structure of downloaded files
+        run: ls -R
+      
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: hola_mundo
+          path: . # This downloads the artifact to the current working directory
+  
       - name: Display structure of downloaded files
         run: ls -R
